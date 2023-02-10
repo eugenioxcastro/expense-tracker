@@ -120,7 +120,18 @@ export default function Dashboard() {
     setDeleteReceiptId("");
   };
 
-  console.log("Mis recibos " + receipts);
+  const onDelete = async () => {
+    let isSucceed = true;
+    try {
+      await deleteReceipt(deleteReceiptId);
+      await deleteImage(deleteReceiptImageBucket);
+    } catch (error) {
+      isSucceed = false;
+    }
+
+    resetDelete();
+    onResult(RECEIPTS_ENUM.delete, isSucceed);
+  };
 
   return !authUser ? (
     <CircularProgress
@@ -134,26 +145,6 @@ export default function Dashboard() {
       </Head>
       <NavBar />
       <Container>
-        <Snackbar
-          open={showSuccessSnackbar}
-          autoHideDuration={1500}
-          onClose={() => setSuccessSnackbar(false)}
-          anchorOrigin={{ horizontal: "center", vertical: "top" }}
-        >
-          <Alert onClose={() => setSuccessSnackbar(false)} severity="success">
-            {snackbarMessage}
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          open={showErrorSnackbar}
-          autoHideDuration={1500}
-          onClose={() => setErrorSnackbar(false)}
-          anchorOrigin={{ horizontal: "center", vertical: "top" }}
-        >
-          <Alert onClose={() => setErrorSnackbar(false)} severity="error">
-            {snackbarMessage}
-          </Alert>
-        </Snackbar>
         <Stack direction="row" sx={{ paddingTop: "1.5em" }}>
           <Typography
             variant="h4"
@@ -203,7 +194,12 @@ export default function Dashboard() {
           <Button color="secondary" variant="outlined" onClick={resetDelete}>
             Cancel
           </Button>
-          <Button color="secondary" variant="contained" autoFocus>
+          <Button
+            color="secondary"
+            variant="contained"
+            autoFocus
+            onClick={onDelete}
+          >
             Delete
           </Button>
         </DialogActions>

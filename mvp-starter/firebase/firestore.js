@@ -80,3 +80,7 @@ export function updateReceipt(
     imageBucket,
   });
 }
+
+export function deleteReceipt(id) {
+  deleteDoc(doc(db, RECEIPTS_COLLECTION, id));
+}

@@ -29,7 +29,7 @@ props: receipt data
  - uid (user id of user who submitted the receipt)
  - date
  - locationName
- - address
+ - category
  - items
  - amount
  - imageUrl
@@ -57,7 +57,7 @@ export default function ReceiptRow(props) {
             </Stack>
             <Stack direction="column" sx={{ flexGrow: 1 }}>
               <Typography variant="h5">
-                {receipt.locationName} ({receipt.address})
+                {receipt.locationName} ({receipt.category})
               </Typography>
               <Typography variant="h5">{receipt.items}</Typography>
             </Stack>

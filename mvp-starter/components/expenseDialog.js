@@ -26,7 +26,7 @@ const DEFAULT_FORM_STATE = {
   file: null,
   date: null,
   locationName: "",
-  category: "",
+  address: "",
   items: "",
   amount: "",
 };
@@ -61,7 +61,7 @@ export default function ExpenseDialog(props) {
     formFields.fileName === DEFAULT_FILE_NAME ||
     !formFields.date ||
     formFields.locationName.length === 0 ||
-    formFields.category.length === 0 ||
+    formFields.address.length === 0 ||
     formFields.items.length === 0 ||
     formFields.amount.length === 0;
 
@@ -98,7 +98,7 @@ export default function ExpenseDialog(props) {
           authUser.uid,
           formFields.date,
           formFields.locationName,
-          formFields.category,
+          formFields.address,
           formFields.items,
           formFields.amount,
           formFields.imageBucket
@@ -109,7 +109,7 @@ export default function ExpenseDialog(props) {
           authUser.uid,
           formFields.date,
           formFields.locationName,
-          formFields.category,
+          formFields.address,
           formFields.items,
           formFields.amount,
           bucket
@@ -180,10 +180,10 @@ export default function ExpenseDialog(props) {
         />
         <TextField
           color="tertiary"
-          label="Category"
+          label="Location address"
           variant="standard"
-          value={formFields.category}
-          onChange={(event) => updateFormField(event, "category")}
+          value={formFields.address}
+          onChange={(event) => updateFormField(event, "address")}
         />
         <TextField
           color="tertiary"

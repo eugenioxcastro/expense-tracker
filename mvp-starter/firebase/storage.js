@@ -20,3 +20,7 @@ export async function uploadImage(image, uid) {
 export async function getDownloadURL(bucket) {
   return await getStorageDownloadURL(ref(storage, bucket));
 }
+
+export async function replaceImage(image, bucket) {
+  await uploadBytes(ref(storage, bucket), image);
+}
